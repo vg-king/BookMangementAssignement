@@ -1,0 +1,154 @@
+.books-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.books-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.books-page h1 {
+  margin: 0;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin: 0;
+}
+
+.subtitle {
+  color: #4f5662;
+  margin: 0;
+}
+
+.primary-btn {
+  background: linear-gradient(120deg, #007bff, #6c63ff);
+  color: #fff;
+  padding: 0.75rem 1.2rem;
+  border-radius: 0.6rem;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0, 123, 255, 0.35);
+}
+
+.table-wrapper {
+  background: #fff;
+  border: 1px solid #e6e8ec;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+  border-radius: 0.9rem;
+  overflow: hidden;
+}
+
+.books-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.books-table thead {
+  background: linear-gradient(120deg, #f6f8fb, #eef2f7);
+}
+
+.books-table th,
+.books-table td {
+  text-align: left;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid #edf0f4;
+  font-size: 0.95rem;
+}
+
+.books-table th {
+  font-weight: 700;
+  color: #3b4453;
+}
+
+.books-table tbody tr:hover {
+  background: #f9fbff;
+}
+
+.cell-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cell-heading {
+  font-weight: 700;
+}
+
+.cell-sub {
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+.table-empty {
+  text-align: center;
+  color: #6c757d;
+}
+
+.table-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ghost-btn,
+.danger-btn {
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid #dfe3e8;
+  background: #fff;
+  color: #3b4453;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+.ghost-btn:hover {
+  border-color: #b8c2d1;
+  background: #f2f6ff;
+}
+
+.danger-btn {
+  border-color: #f3c2c2;
+  color: #b71c1c;
+}
+
+.danger-btn:hover {
+  background: #fff4f4;
+  border-color: #e57f7f;
+}
+
+.feedback-banner {
+  padding: 0.75rem 1rem;
+  background: #eef7ff;
+  color: #084298;
+  border: 1px solid #cfe2ff;
+  border-radius: 0.7rem;
+}
+
+@media screen and (max-width: 900px) {
+  .books-page__header {
+    gap: 1rem;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+}
