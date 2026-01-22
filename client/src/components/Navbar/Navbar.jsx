@@ -26,7 +26,6 @@ const Navbar = () => {
 
       <div className='navbar-links_container'>
         <Menu />
-        <Link className='pill-btn' to='/addBook'>+ Add Title</Link>
       </div>
 
       <div className='navbar-menu'>
@@ -39,9 +38,6 @@ const Navbar = () => {
           <div className='navbar-menu_container scale-up-center'>
             <div className='navbar-menu_container-links'>
               <Menu />
-              <Link className='pill-btn full-width' to='/addBook' onClick={() => setToggleMenu(false)}>
-                + Add Title
-              </Link>
             </div>
           </div>
         )}

@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
-const PORT = process.env.PORT || 8082;
+const PORT = process.env.PORT || 8083;
 
 //Cross Origin Resource Sharing
 app.use(cors(corsOptions));
