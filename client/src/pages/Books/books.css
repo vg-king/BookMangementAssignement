@@ -30,20 +30,20 @@
 }
 
 .primary-btn {
-  background: linear-gradient(120deg, #007bff, #6c63ff);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
   color: #fff;
   padding: 0.75rem 1.2rem;
   border-radius: 0.6rem;
   text-decoration: none;
   font-weight: 700;
   letter-spacing: 0.02em;
-  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.25);
+  box-shadow: 0 10px 30px rgba(108, 99, 255, 0.25);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .primary-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(0, 123, 255, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 194, 255, 0.35);
 }
 
 .table-wrapper {
@@ -61,7 +61,7 @@
 }
 
 .books-table thead {
-  background: linear-gradient(120deg, #f6f8fb, #eef2f7);
+  background: linear-gradient(120deg, #f7f8fb, #eef2ff);
 }
 
 .books-table th,
@@ -74,7 +74,7 @@
 
 .books-table th {
   font-weight: 700;
-  color: #3b4453;
+  color: #1f2937;
 }
 
 .books-table tbody tr:hover {
@@ -113,16 +113,16 @@
   border-radius: 0.5rem;
   border: 1px solid #dfe3e8;
   background: #fff;
-  color: #3b4453;
+  color: #1f2937;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .ghost-btn:hover {
-  border-color: #b8c2d1;
-  background: #f2f6ff;
+  border-color: rgba(108, 99, 255, 0.5);
+  background: rgba(108, 99, 255, 0.08);
 }
 
 .danger-btn {

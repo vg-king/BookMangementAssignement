@@ -15,16 +15,18 @@ import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/books' element={<Books />} />
-        <Route path='/books/:id' element={<BookDetails />} />
-        <Route path='/addBook' element={<AddBook />} />
-        <Route path='/books/editBook/:id' element={<EditBook />} />
-      </Routes>
-    </BrowserRouter>
+    <div className='app-bg'>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/books' element={<Books />} />
+          <Route path='/books/:id' element={<BookDetails />} />
+          <Route path='/addBook' element={<AddBook />} />
+          <Route path='/books/editBook/:id' element={<EditBook />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
