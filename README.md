@@ -189,7 +189,7 @@ Minimum 10 characters required
 
 ## Contact
 
-**Developer**: Vedavyat Gupta  
+**Developer**: Vishnu Gupta  
 **Email**: vg3772285@gmail.com
 
 ## License
