@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //Routes
+app.use('/api/books', require('./routes/api/books'));
 app.use('/books', require('./routes/api/books'));
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
