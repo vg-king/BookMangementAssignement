@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { addBook } from '../../service/api';
 import './addBook.css';
 import 'animate.css';
@@ -7,6 +7,7 @@ import 'animate.css';
 const EMAIL_REGEX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 const AddBook = () => {
+  const navigate = useNavigate();
   const [book, setBook] = useState({
     title: '',
     author: '',
@@ -22,18 +23,68 @@ const AddBook = () => {
 
   const validate = (fieldValues = book) => {
     const temp = { ...errors };
-    if ('title' in fieldValues) temp.title = fieldValues.title.trim() ? '' : 'Title is required.';
-    if ('author' in fieldValues) temp.author = fieldValues.author.trim() ? '' : 'Author is required.';
-    if ('publisher' in fieldValues) temp.publisher = fieldValues.publisher.trim() ? '' : 'Publisher is required.';
-    if ('contactEmail' in fieldValues) temp.contactEmail = EMAIL_REGEX.test(fieldValues.contactEmail) ? '' : 'Enter a valid email.';
+    
+    if ('title' in fieldValues) {
+      temp.title = fieldValues.title.trim() ? '' : '❌ Title is required.';
+    }
+    
+    if ('author' in fieldValues) {
+      temp.author = fieldValues.author.trim() ? '' : '❌ Author is required.';
+    }
+    
+    if ('publisher' in fieldValues) {
+      temp.publisher = fieldValues.publisher.trim() ? '' : '❌ Publisher is required.';
+    }
+    
+    if ('contactEmail' in fieldValues) {
+      if (!fieldValues.contactEmail.trim()) {
+        temp.contactEmail = '❌ Email is required.';
+      } else if (!EMAIL_REGEX.test(fieldValues.contactEmail)) {
+        temp.contactEmail = '❌ Enter a valid email address.';
+      } else {
+        temp.contactEmail = '';
+      }
+    }
+    
     if ('bookPages' in fieldValues) {
       const pages = Number(fieldValues.bookPages);
-      temp.bookPages = Number.isInteger(pages) && pages > 0 ? '' : 'Pages must be a positive integer.';
+      if (!fieldValues.bookPages) {
+        temp.bookPages = '❌ Number of pages is required.';
+      } else if (!Number.isInteger(pages) || pages <= 0) {
+        temp.bookPages = '❌ Pages must be a positive integer.';
+      } else {
+        temp.bookPages = '';
+      }
     }
-    if ('publishDate' in fieldValues) temp.publishDate = fieldValues.publishDate ? '' : 'Publish date is required.';
-    if ('synopsis' in fieldValues) temp.synopsis = fieldValues.synopsis.trim().length >= 10 ? '' : 'Synopsis must be at least 10 characters.';
+    
+    if ('publishDate' in fieldValues) {
+      if (!fieldValues.publishDate) {
+        temp.publishDate = '❌ Publish date is required.';
+      } else {
+        const selectedDate = new Date(fieldValues.publishDate);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selectedDate > today) {
+          temp.publishDate = '⚠️ Future date selected. Is this correct?';
+        } else {
+          temp.publishDate = '';
+        }
+      }
+    }
+    
+    if ('synopsis' in fieldValues) {
+      const synopsisLength = fieldValues.synopsis.trim().length;
+      if (synopsisLength === 0) {
+        temp.synopsis = '❌ Synopsis is required.';
+      } else if (synopsisLength < 10) {
+        temp.synopsis = '❌ Synopsis must be at least 10 characters.';
+      } else {
+        temp.synopsis = '';
+      }
+    }
+    
     setErrors({ ...temp });
-    return Object.values(temp).every((x) => x === '');
+    return Object.values(temp).every((x) => x === '' || x.startsWith('⚠️'));
   };
 
   const onValueChange = (e) => {
@@ -45,9 +96,15 @@ const AddBook = () => {
 
   const addNewBook = async (e) => {
     e.preventDefault();
-    if (!validate()) return;
+    
+    if (!validate()) {
+      setFeedback('❌ Please fix all errors before submitting.');
+      return;
+    }
+    
     setSubmitting(true);
     setFeedback('');
+    
     try {
       const payload = {
         title: book.title.trim(),
@@ -58,11 +115,29 @@ const AddBook = () => {
         publishDate: book.publishDate,
         synopsis: book.synopsis.trim(),
       };
+      
       const response = await addBook(payload);
-      setFeedback(response?.data?.message || 'Book added!');
-      setBook({ title: '', author: '', publisher: '', contactEmail: '', bookPages: '', publishDate: '', synopsis: '' });
+      setFeedback('✅ ' + (response?.data?.message || 'Book added successfully!'));
+      
+      // Clear form
+      setBook({ 
+        title: '', 
+        author: '', 
+        publisher: '', 
+        contactEmail: '', 
+        bookPages: '', 
+        publishDate: '', 
+        synopsis: '' 
+      });
+      setErrors({});
+      
+      // Redirect to books page after 1.5 seconds
+      setTimeout(() => {
+        navigate('/books');
+      }, 1500);
+      
     } catch (error) {
-      setFeedback('Something went wrong. Please try again.');
+      setFeedback('❌ Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
     }

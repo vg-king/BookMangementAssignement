@@ -26,16 +26,18 @@ const Books = () => {
     }
   };
 
-  const deleteBookFromCollection = async (id) => {
-    const confirmed = window.confirm('Delete this book from the collection?');
+  const deleteBookFromCollection = async (id, title) => {
+    const confirmed = window.confirm(
+      `⚠️ Are you sure you want to delete "${title}"?\n\nThis action cannot be undone.`
+    );
     if (!confirmed) return;
 
     try {
       const response = await deleteBook(id);
-      setFeedback(response?.data?.message || 'Book deleted.');
+      setFeedback('✅ ' + (response?.data?.message || 'Book deleted successfully.'));
       getAllBooks();
     } catch (error) {
-      setFeedback('Could not delete this book. Please retry.');
+      setFeedback('❌ Could not delete this book. Please try again.');
     }
   };
 
@@ -91,7 +93,7 @@ const Books = () => {
                     <Link to={`/books/editBook/${book.id}`} className='ghost-btn'>
                       Edit
                     </Link>
-                    <button className='danger-btn' onClick={() => deleteBookFromCollection(book.id)}>
+                    <button className='danger-btn' onClick={() => deleteBookFromCollection(book.id, book.title)}>
                       Remove
                     </button>
                   </td>
