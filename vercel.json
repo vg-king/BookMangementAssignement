@@ -2,29 +2,45 @@
   "version": 2,
   "builds": [
     {
-      "src": "server/index.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "build"
       }
+    },
+    {
+      "src": "api/books.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/books/(.*)",
-      "dest": "server/index.js"
+      "dest": "/api/books.js"
     },
     {
       "src": "/books/(.*)",
-      "dest": "server/index.js"
+      "dest": "/api/books.js"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/client/build/static/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/client/build/favicon.ico"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/client/build/manifest.json"
+    },
+    {
+      "src": "/robots.txt",
+      "dest": "/client/build/robots.txt"
     },
     {
       "src": "/(.*)",
-      "dest": "client/build/$1"
+      "dest": "/client/build/index.html"
     }
   ]
 }

@@ -18,4 +18,10 @@ app.use(express.json());
 app.use('/api/books', require('./routes/api/books'));
 app.use('/books', require('./routes/api/books'));
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Export for Vercel serverless
+module.exports = app;
+
+// Only listen when not in Vercel
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
